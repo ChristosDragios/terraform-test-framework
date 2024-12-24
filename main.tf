@@ -44,12 +44,12 @@ data "aws_iam_policy_document" "iam-policy-1" {
   statement {
     sid    = "AllowPublicRead"
     effect = "Allow"
-resources = [
+    resources = [
       "arn:aws:s3:::www.${var.bucket_name}",
       "arn:aws:s3:::www.${var.bucket_name}/*",
     ]
-actions = ["S3:GetObject"]
-principals {
+    actions = ["S3:GetObject"]
+    principals {
       type        = "*"
       identifiers = ["*"]
     }

@@ -9,3 +9,8 @@ variable "bucket_name" {
     error_message = "${var.bucket_name} must match exactly static-website-christosd"
   }
 }
+
+locals {
+  url = aws_s3_bucket_website_configuration.static-website-bucket.website_endpoint
+}
+

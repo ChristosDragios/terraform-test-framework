@@ -1,17 +1,8 @@
-run "execute" {
-  command = apply
-
-  variables {
-    website_name = "Test${substr(uuid(),0,5)}"
-  }
-}
-
-
 run "check_site" {
   command = apply
 
-  variables {
-    website_url = run.execute.homepage_url
+variables {
+    website_url = "http://www.static-website-christosd.s3-website.eu-central-1.amazonaws.com"
   }
 
   module {
@@ -20,6 +11,6 @@ run "check_site" {
 
   assert {
     condition     = data.http.main.status_code == 200
-    error_message = "Website ${aws_s3_bucket_website_configuration.static-website-bucket.website_endpoint} returned the status code ${data.http.main.status_code}. Expected 200."
+    error_message = "Website ${var.website_url} returned the status code ${data.http.main.status_code}. Expected 200."
   }
 }
